@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Iframe Detection</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+  </style>
+  <script>
+    // No jQuery needed, pure JS for CSP safety
+    window.addEventListener('DOMContentLoaded', function () {
+      var msg = window.top !== window.self
+        ? "✅ I am inside an iframe"
+        : "❌ I am NOT inside an iframe";
+
+      // Either jQuery or vanilla fallback
+      if (typeof $ !== 'undefined' && $('#iframe-status').length) {
+        $('#iframe-status').text(msg);
+      } else {
+        var div = document.getElementById('iframe-status');
+        if (div) div.textContent = msg;
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="iframe-status">Checking iframe status...</div>
+</body>
+</html>
